@@ -18,11 +18,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import edu.uncc.weather.databinding.FragmentCurrentWeatherBinding;
+import okhttp3.OkHttpClient;
 
 public class CurrentWeatherFragment extends Fragment {
     private static final String ARG_PARAM_CITY = "ARG_PARAM_CITY";
     private DataService.City mCity;
     FragmentCurrentWeatherBinding binding;
+    private final OkHttpClient client = new OkHttpClient();
 
     public CurrentWeatherFragment() {
         // Required empty public constructor

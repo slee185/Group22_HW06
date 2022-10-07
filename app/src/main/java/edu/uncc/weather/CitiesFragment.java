@@ -43,8 +43,8 @@ public class CitiesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         getActivity().setTitle("Cities");
+
         adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, DataService.cities);
         binding.listView.setAdapter(adapter);
 
