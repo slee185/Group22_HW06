@@ -1,3 +1,8 @@
+// Homework Assignment 06
+// Group22_HW06
+// Stephanie Lee Karp
+// Ken Stanley
+
 package edu.uncc.weather;
 
 import android.os.Bundle;
@@ -56,8 +61,7 @@ public class WeatherForecastFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_weather_forecast, container, false);
     }

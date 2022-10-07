@@ -1,3 +1,8 @@
+// Homework Assignment 06
+// Group22_HW06
+// Stephanie Lee Karp
+// Ken Stanley
+
 package edu.uncc.weather;
 
 import android.os.Bundle;
@@ -38,8 +43,7 @@ public class CurrentWeatherFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCurrentWeatherBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }

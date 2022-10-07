@@ -1,3 +1,8 @@
+// Homework Assignment 06
+// Group22_HW06
+// Stephanie Lee Karp
+// Ken Stanley
+
 package edu.uncc.weather;
 
 import android.content.Context;
