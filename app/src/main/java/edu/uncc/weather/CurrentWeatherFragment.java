@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import edu.uncc.weather.databinding.FragmentCurrentWeatherBinding;
 import okhttp3.Call;
@@ -34,6 +35,7 @@ public class CurrentWeatherFragment extends Fragment {
     private DataService.City mCity;
     FragmentCurrentWeatherBinding binding;
     private final OkHttpClient client = new OkHttpClient();
+    CitiesResponse citiesResponse;
 
     public CurrentWeatherFragment() {
         // Required empty public constructor
@@ -88,6 +90,11 @@ public class CurrentWeatherFragment extends Fragment {
                 }
 
                 Gson gson = new Gson();
+                citiesResponse = gson.fromJson(Objects.requireNonNull(response.body()).string(), CitiesResponse.class);
+
+                requireActivity().runOnUiThread(() -> {
+
+                });
 
             }
         });
