@@ -5,6 +5,7 @@
 
 package edu.uncc.weather;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import edu.uncc.weather.databinding.FragmentCurrentWeatherBinding;
 
@@ -52,5 +54,27 @@ public class CurrentWeatherFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Current Weather");
+
+        TextView textViewCityName = binding.textViewCityName;
+        textViewCityName.setText(mCity.getCity());
+
+        binding.buttonCheckForecast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.goToWeatherForecast(mCity);
+            }
+        });
+    }
+
+    CurrentWeatherFragment.CurrentWeatherListener mListener;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mListener = (CurrentWeatherFragment.CurrentWeatherListener) context;
+    }
+
+    interface CurrentWeatherListener {
+        void goToWeatherForecast(DataService.City city);
     }
 }
