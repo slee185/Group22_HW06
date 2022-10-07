@@ -32,13 +32,22 @@ import okhttp3.Response;
 
 public class CurrentWeatherFragment extends Fragment {
     private static final String ARG_PARAM_CITY = "ARG_PARAM_CITY";
+
     private DataService.City mCity;
-    FragmentCurrentWeatherBinding binding;
+
     private final OkHttpClient client = new OkHttpClient();
-    CitiesResponse citiesResponse;
+    private Weather weather;
+
+    FragmentCurrentWeatherBinding binding;
+    WeatherResponse weatherResponse;
 
     public CurrentWeatherFragment() {
         // Required empty public constructor
+    }
+
+    public CurrentWeatherFragment(iListener listener, Weather weather) {
+        this.listener = listener;
+        this.weather = weather;
     }
 
     public static CurrentWeatherFragment newInstance(DataService.City city) {
@@ -68,8 +77,15 @@ public class CurrentWeatherFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Current Weather");
 
-        TextView textViewCityName = binding.textViewCityName;
-        textViewCityName.setText(mCity.getCity());
+        binding.textViewCityName.setText(mCity.getCity());
+        binding.textViewTemp.setText(String.valueOf(weather.temp));
+        binding.textViewTempMax.setText(String.valueOf(weather.maxTemp));
+        binding.textViewTempMin.setText(String.valueOf(weather.minTemp));
+        binding.textViewDesc.setText(weather.description);
+        binding.textViewHumidity.setText(String.valueOf(weather.humidity));
+        binding.textViewWindSpeed.setText(String.valueOf(weather.windSpeed));
+        binding.textViewWindDegree.setText(String.valueOf(weather.windDegree));
+        binding.textViewCloudiness.setText(String.valueOf(weather.cloudiness));
 
         Request request = new Request.Builder()
                 .url("https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={b6293da957857aa018c64d4783dad874}")
@@ -90,7 +106,7 @@ public class CurrentWeatherFragment extends Fragment {
                 }
 
                 Gson gson = new Gson();
-                citiesResponse = gson.fromJson(Objects.requireNonNull(response.body()).string(), CitiesResponse.class);
+                weatherResponse = gson.fromJson(Objects.requireNonNull(response.body()).string(), WeatherResponse.class);
 
                 requireActivity().runOnUiThread(() -> {
 
@@ -102,20 +118,20 @@ public class CurrentWeatherFragment extends Fragment {
         binding.buttonCheckForecast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.goToWeatherForecast(mCity);
+                listener.goToWeatherForecast(mCity);
             }
         });
     }
 
-    CurrentWeatherFragment.CurrentWeatherListener mListener;
+    iListener listener;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        mListener = (CurrentWeatherFragment.CurrentWeatherListener) context;
+        listener = (iListener) context;
     }
 
-    interface CurrentWeatherListener {
+    interface iListener {
         void goToWeatherForecast(DataService.City city);
     }
 }

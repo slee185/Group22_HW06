@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity implements CitiesFragment.CitiesFragmentListener, CurrentWeatherFragment.CurrentWeatherListener {
+public class MainActivity extends AppCompatActivity implements CitiesFragment.CitiesFragmentListener, CurrentWeatherFragment.iListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements CitiesFragment.Ci
     }
 
     @Override
-    public void gotoCurrentWeather(DataService.City city) {
+    public void gotoCurrentWeather(DataService.City city, Weather weather) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.rootView, CurrentWeatherFragment.newInstance(city))
                 .addToBackStack(null)

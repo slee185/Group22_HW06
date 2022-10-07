@@ -22,6 +22,7 @@ import edu.uncc.weather.databinding.FragmentCitiesBinding;
 
 public class CitiesFragment extends Fragment {
     FragmentCitiesBinding binding;
+    Weather weather;
 
     public CitiesFragment() {
         // Required empty public constructor
@@ -51,7 +52,7 @@ public class CitiesFragment extends Fragment {
         binding.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                mListener.gotoCurrentWeather(adapter.getItem(position));
+                mListener.gotoCurrentWeather(adapter.getItem(position), weather);
             }
         });
     }
@@ -65,6 +66,6 @@ public class CitiesFragment extends Fragment {
     }
 
     interface CitiesFragmentListener {
-        void gotoCurrentWeather(DataService.City city);
+        void gotoCurrentWeather(DataService.City city, Weather weather);
     }
 }

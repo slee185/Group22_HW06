@@ -5,7 +5,7 @@
 
 package edu.uncc.weather;
 
-public class CitiesResponse {
+public class WeatherResponse {
     String status;
-    DataService.City city;
+    Weather weather;
 }
