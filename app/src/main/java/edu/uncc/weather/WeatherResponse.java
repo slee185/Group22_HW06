@@ -5,7 +5,18 @@
 
 package edu.uncc.weather;
 
+import androidx.annotation.NonNull;
+
 public class WeatherResponse {
     String status;
     Weather weather;
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "WeatherResponse{" +
+                "status='" + status + '\'' +
+                ", weather=" + weather +
+                '}';
+    }
 }

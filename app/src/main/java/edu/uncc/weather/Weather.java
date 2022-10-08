@@ -11,33 +11,33 @@ import com.google.gson.annotations.SerializedName;
 public class Weather {
     @SerializedName("Temp")
     Boolean temp;
-    @SerializedName("MaxTemp")
-    Boolean maxTemp;
-    @SerializedName("MinTemp")
-    Boolean minTemp;
+    @SerializedName("Temp_Min")
+    Boolean temp_min;
+    @SerializedName("Temp_Max")
+    Boolean temp_max;
     @SerializedName("Description")
     String description;
     @SerializedName("Humidity")
     Integer humidity;
-    @SerializedName("WindSpeed")
-    Boolean windSpeed;
-    @SerializedName("WindDegree")
-    Boolean windDegree;
+    @SerializedName("Speed")
+    Boolean speed;
+    @SerializedName("Deg")
+    Boolean deg;
     @SerializedName("Cloudiness")
-    Integer cloudiness;
+    Integer all;
 
     @NonNull
     @Override
     public String toString() {
         return "Weather{" +
                 "Temp=" + temp +
-                ", maxTemp='" + maxTemp + '\'' +
-                ", minTemp='" + minTemp + '\'' +
+                ", maxTemp='" + temp_min + '\'' +
+                ", minTemp='" + temp_max + '\'' +
                 ", description='" + description + '\'' +
                 ", humidity='" + humidity + '\'' +
-                ", windSpeed='" + windSpeed + '\'' +
-                ", windDegree='" + windDegree + '\'' +
-                ", cloudiness='" + cloudiness + '\'' +
+                ", windSpeed='" + speed + '\'' +
+                ", windDegree='" + deg + '\'' +
+                ", cloudiness='" + all + '\'' +
                 '}';
     }
 }

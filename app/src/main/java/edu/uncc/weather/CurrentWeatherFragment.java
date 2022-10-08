@@ -26,6 +26,7 @@ import java.util.Objects;
 import edu.uncc.weather.databinding.FragmentCurrentWeatherBinding;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -78,17 +79,20 @@ public class CurrentWeatherFragment extends Fragment {
         getActivity().setTitle("Current Weather");
 
         binding.textViewCityName.setText(mCity.getCity());
-        binding.textViewTemp.setText(String.valueOf(weather.temp));
-        binding.textViewTempMax.setText(String.valueOf(weather.maxTemp));
-        binding.textViewTempMin.setText(String.valueOf(weather.minTemp));
-        binding.textViewDesc.setText(weather.description);
-        binding.textViewHumidity.setText(String.valueOf(weather.humidity));
-        binding.textViewWindSpeed.setText(String.valueOf(weather.windSpeed));
-        binding.textViewWindDegree.setText(String.valueOf(weather.windDegree));
-        binding.textViewCloudiness.setText(String.valueOf(weather.cloudiness));
+
+
+        String lat = String.valueOf(mCity.getLat());
+        String lon = String.valueOf(mCity.getLat());
+        String appid = "b6293da957857aa018c64d4783dad874";
+
+        HttpUrl url = HttpUrl.parse("https://api.openweathermap.org/data/2.5/weather").newBuilder()
+                .addQueryParameter("lat", lat)
+                .addQueryParameter("lon", lon)
+                .addQueryParameter("appid", appid)
+                .build();
 
         Request request = new Request.Builder()
-                .url("https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={b6293da957857aa018c64d4783dad874}")
+                .url(url)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -109,6 +113,14 @@ public class CurrentWeatherFragment extends Fragment {
                 weatherResponse = gson.fromJson(Objects.requireNonNull(response.body()).string(), WeatherResponse.class);
 
                 requireActivity().runOnUiThread(() -> {
+                    binding.textViewTemp.setText(String.valueOf(weather.temp));
+                    binding.textViewTempMax.setText(String.valueOf(weather.temp_max));
+                    binding.textViewTempMin.setText(String.valueOf(weather.temp_min));
+                    binding.textViewDesc.setText(weather.description);
+                    binding.textViewHumidity.setText(String.valueOf(weather.humidity));
+                    binding.textViewWindSpeed.setText(String.valueOf(weather.speed));
+                    binding.textViewWindDegree.setText(String.valueOf(weather.deg));
+                    binding.textViewCloudiness.setText(String.valueOf(weather.all));
 
                 });
 
