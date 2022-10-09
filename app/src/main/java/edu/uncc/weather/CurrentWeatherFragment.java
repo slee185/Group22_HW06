@@ -15,10 +15,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -68,7 +68,7 @@ public class CurrentWeatherFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCurrentWeatherBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -76,18 +76,18 @@ public class CurrentWeatherFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Current Weather");
+        requireActivity().setTitle("Current Weather");
 
         binding.textViewCityName.setText(mCity.getCity());
-
 
         String lat = String.valueOf(mCity.getLat());
         String lon = String.valueOf(mCity.getLat());
         String appid = "b6293da957857aa018c64d4783dad874";
 
-        HttpUrl url = HttpUrl.parse("https://api.openweathermap.org/data/2.5/weather").newBuilder()
+        HttpUrl url = Objects.requireNonNull(HttpUrl.parse("https://api.openweathermap.org/data/2.5/weather")).newBuilder()
                 .addQueryParameter("lat", lat)
                 .addQueryParameter("lon", lon)
+                .addQueryParameter("units", "imperial")
                 .addQueryParameter("appid", appid)
                 .build();
 
@@ -111,28 +111,26 @@ public class CurrentWeatherFragment extends Fragment {
 
                 Gson gson = new Gson();
                 weatherResponse = gson.fromJson(Objects.requireNonNull(response.body()).string(), WeatherResponse.class);
+                Weather weather = weatherResponse.weather.get(0);
 
                 requireActivity().runOnUiThread(() -> {
-                    binding.textViewTemp.setText(String.valueOf(weather.temp));
-                    binding.textViewTempMax.setText(String.valueOf(weather.temp_max));
-                    binding.textViewTempMin.setText(String.valueOf(weather.temp_min));
+                    binding.textViewTemp.setText(String.valueOf(weatherResponse.main.temp));
+                    binding.textViewTempMax.setText(String.valueOf(weatherResponse.main.temp_max));
+                    binding.textViewTempMin.setText(String.valueOf(weatherResponse.main.temp_min));
                     binding.textViewDesc.setText(weather.description);
-                    binding.textViewHumidity.setText(String.valueOf(weather.humidity));
-                    binding.textViewWindSpeed.setText(String.valueOf(weather.speed));
-                    binding.textViewWindDegree.setText(String.valueOf(weather.deg));
-                    binding.textViewCloudiness.setText(String.valueOf(weather.all));
+                    binding.textViewHumidity.setText(String.valueOf(weatherResponse.main.humidity));
+                    binding.textViewWindSpeed.setText(String.valueOf(weatherResponse.wind.speed));
+                    binding.textViewWindDegree.setText(String.valueOf(weatherResponse.wind.deg));
+                    binding.textViewCloudiness.setText(String.valueOf(weatherResponse.clouds.all));
 
+                    // Get the image icon for the current weather
+                    String url = "https://openweathermap.org/img/wn/" + weather.icon + "@2x.png";
+                    Picasso.get().load(url).into(binding.imageViewWeatherIcon);
                 });
-
             }
         });
 
-        binding.buttonCheckForecast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.goToWeatherForecast(mCity);
-            }
-        });
+        binding.buttonCheckForecast.setOnClickListener(v -> listener.goToWeatherForecast(mCity));
     }
 
     iListener listener;
