@@ -37,7 +37,6 @@ public class CurrentWeatherFragment extends Fragment {
     private DataService.City mCity;
 
     private final OkHttpClient client = new OkHttpClient();
-    private Weather weather;
 
     FragmentCurrentWeatherBinding binding;
     WeatherResponse weatherResponse;
@@ -46,10 +45,11 @@ public class CurrentWeatherFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public CurrentWeatherFragment(iListener listener, Weather weather) {
-        this.listener = listener;
-        this.weather = weather;
-    }
+    // don't know if below is needed
+//    public CurrentWeatherFragment(iListener listener, Weather weather) {
+//        this.listener = listener;
+//        this.weather = weather;
+//    }
 
     public static CurrentWeatherFragment newInstance(DataService.City city) {
         CurrentWeatherFragment fragment = new CurrentWeatherFragment();
