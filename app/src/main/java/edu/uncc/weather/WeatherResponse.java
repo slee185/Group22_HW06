@@ -7,16 +7,37 @@ package edu.uncc.weather;
 
 import androidx.annotation.NonNull;
 
-public class WeatherResponse {
-    String status;
-    Weather weather;
+import java.util.ArrayList;
 
-    @NonNull
+public class WeatherResponse {
+    Coord coord;
+    ArrayList<Weather> weather;
+    Main main;
+    int visibility;
+    Wind wind;
+    Rain rain;
+    Clouds clouds;
+    int dt;
+    Sys sys;
+    int timezone;
+    int id;
+    String name;
+
     @Override
     public String toString() {
         return "WeatherResponse{" +
-                "status='" + status + '\'' +
+                "coord=" + coord +
                 ", weather=" + weather +
+                ", main=" + main +
+                ", visibility=" + visibility +
+                ", wind=" + wind +
+                ", rain=" + rain +
+                ", clouds=" + clouds +
+                ", dt=" + dt +
+                ", sys=" + sys +
+                ", timezone=" + timezone +
+                ", id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
