@@ -9,35 +9,18 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 public class Weather {
-    @SerializedName("Temp")
-    Boolean temp;
-    @SerializedName("Temp_Min")
-    Boolean temp_min;
-    @SerializedName("Temp_Max")
-    Boolean temp_max;
-    @SerializedName("Description")
+    int id;
+    String main;
     String description;
-    @SerializedName("Humidity")
-    Integer humidity;
-    @SerializedName("Speed")
-    Boolean speed;
-    @SerializedName("Deg")
-    Boolean deg;
-    @SerializedName("Cloudiness")
-    Integer all;
+    String icon;
 
-    @NonNull
     @Override
     public String toString() {
         return "Weather{" +
-                "Temp=" + temp +
-                ", maxTemp='" + temp_min + '\'' +
-                ", minTemp='" + temp_max + '\'' +
+                "id=" + id +
+                ", main='" + main + '\'' +
                 ", description='" + description + '\'' +
-                ", humidity='" + humidity + '\'' +
-                ", windSpeed='" + speed + '\'' +
-                ", windDegree='" + deg + '\'' +
-                ", cloudiness='" + all + '\'' +
+                ", icon='" + icon + '\'' +
                 '}';
     }
 }
