@@ -76,15 +76,14 @@ public class WeatherForecastFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         requireActivity().setTitle("Weather Forecast");
 
-        binding.textViewCityName.setText(mCity.getCity());
+        binding.textViewCityName.setText(getString(R.string.city_country, mCity.getCity(), mCity.getCountry()));
 
         String lat = String.valueOf(mCity.getLat());
         String lon = String.valueOf(mCity.getLat());
         String appid = "b6293da957857aa018c64d4783dad874";
 
         HttpUrl url = Objects.requireNonNull(HttpUrl.parse("https://api.openweathermap.org/data/2.5/forecast")).newBuilder()
-                .addQueryParameter("lat", lat)
-                .addQueryParameter("lon", lon)
+                .addQueryParameter("lat", lat)                .addQueryParameter("lon", lon)
                 .addQueryParameter("units", "imperial")
                 .addQueryParameter("appid", appid)
                 .build();

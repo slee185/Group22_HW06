@@ -78,7 +78,7 @@ public class CurrentWeatherFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         requireActivity().setTitle("Current Weather");
 
-        binding.textViewCityName.setText(mCity.getCity());
+        binding.textViewCityName.setText(getString(R.string.city_country, mCity.getCity(), mCity.getCountry()));
 
         String lat = String.valueOf(mCity.getLat());
         String lon = String.valueOf(mCity.getLat());

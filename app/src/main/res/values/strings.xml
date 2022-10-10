@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Weather</string>
+
+    <string name="city_country">%s, %s</string>
     <string name="temp_label">Temperature</string>
     <string name="temp_max_label">Temperature Max</string>
     <string name="temp_min_label">Temperature Min</string>
