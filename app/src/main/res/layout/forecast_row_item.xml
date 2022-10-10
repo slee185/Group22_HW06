@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewWeatherIcon"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewWeatherIcon2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,14 +19,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:text="@string/temp_fahrenheit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDateTime" />
 
     <TextView
         android:id="@+id/textViewTempMax"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/textViewTempMin"
+        android:layout_marginStart="16dp"
+        android:text="@string/temp_max"
         app:layout_constraintStart_toEndOf="@+id/textViewTemp"
         app:layout_constraintTop_toTopOf="@+id/textViewTemp" />
 
@@ -34,14 +36,16 @@
         android:id="@+id/textViewTempMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/textViewDateTime"
+        android:layout_marginStart="16dp"
+        android:text="@string/temp_min"
+        app:layout_constraintStart_toEndOf="@+id/textViewTempMax"
         app:layout_constraintTop_toTopOf="@+id/textViewTempMax" />
 
     <ImageView
-        android:id="@+id/imageViewWeatherIcon"
+        android:id="@+id/imageViewWeatherIcon2"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/ic_launcher_background"
+        android:contentDescription="@string/blank_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,6 +54,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:text="@string/humidity_percent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTemp" />

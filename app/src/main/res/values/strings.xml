@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">Weather</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="city_country">%s, %s</string>
+    <string name="temp_fahrenheit">%.2f F</string>
+    <string name="temp_max">Max: %.2f F</string>
+    <string name="temp_min">Min: %.2f F</string>
+    <string name="string_percent">%d%%</string>
+    <string name="wind_speed">%.2f miles/hr</string>
+    <string name="wind_deg">%.1f degrees</string>
+    <string name="humidity_percent">Humidity: %d%%</string>
+
     <string name="temp_label">Temperature</string>
     <string name="temp_max_label">Temperature Max</string>
     <string name="temp_min_label">Temperature Min</string>
@@ -11,4 +19,6 @@
     <string name="wind_degree_label">Wind Degree</string>
     <string name="cloudiness_label">Cloudiness</string>
     <string name="check_forecaste_label">Check Forecast</string>
+    <string name="blank_string">"  "</string>
+    <string name="string_dash">-</string>
 </resources>

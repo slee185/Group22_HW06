@@ -1,32 +1,15 @@
-// Homework Assignment 06
-// Group22_HW06
-// Stephanie Lee Karp
-// Ken Stanley
-
 package edu.uncc.weather;
 
-import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
-
-public class WeatherResponse {
-    Coord coord;
-    ArrayList<Weather> weather;
-    Main main;
-    int visibility;
-    Wind wind;
-    Rain rain;
-    Clouds clouds;
-    long dt;
-    Sys sys;
-    long timezone;
-    int id;
-    String name;
+public class List extends WeatherResponse {
+    double pop;
+    String dt_txt;
 
     @Override
     public String toString() {
-        return "WeatherResponse{" +
-                "coord=" + coord +
+        return "List{" +
+                "pop=" + pop +
+                ", dt_txt='" + dt_txt + '\'' +
+                ", coord=" + coord +
                 ", weather=" + weather +
                 ", main=" + main +
                 ", visibility=" + visibility +

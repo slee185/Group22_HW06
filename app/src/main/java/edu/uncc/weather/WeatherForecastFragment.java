@@ -6,10 +6,12 @@
 package edu.uncc.weather;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -66,7 +68,7 @@ public class WeatherForecastFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentWeatherForecastBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -76,7 +78,7 @@ public class WeatherForecastFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         requireActivity().setTitle("Weather Forecast");
 
-        binding.textViewCityName.setText(mCity.getCity());
+        binding.textViewCityName.setText(getString(R.string.city_country, mCity.getCity(), mCity.getCountry()));
 
         String lat = String.valueOf(mCity.getLat());
         String lon = String.valueOf(mCity.getLat());
@@ -114,19 +116,23 @@ public class WeatherForecastFragment extends Fragment {
                     binding.listView.setAdapter(new ForecastAdapter(
                             requireActivity(),
                             R.layout.forecast_row_item,
-                            (List<Forecast>) forecastResponse.forecast
+                            forecastResponse.list,
+                            forecastResponse.city
                     ));
                 });
             }
         });
     }
 
-    public class ForecastAdapter extends ArrayAdapter<Forecast> {
+    public class ForecastAdapter extends ArrayAdapter<edu.uncc.weather.List> {
+        City city;
 
-        public ForecastAdapter(@NonNull Context context, int resource, @NonNull List<Forecast> objects) {
+        public ForecastAdapter(@NonNull Context context, int resource, @NonNull List<edu.uncc.weather.List> objects, City city) {
             super(context, resource, objects);
+            this.city = city;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -134,26 +140,19 @@ public class WeatherForecastFragment extends Fragment {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.forecast_row_item, parent, false);
             }
 
-            Weather weather = forecastResponse.weather.get(0);
+            edu.uncc.weather.List list = getItem(position);
+            Weather weather = list.weather.get(0);
 
-            TextView textViewDateTime = convertView.findViewById(R.id.textViewDateTime);
-            TextView textViewTemp = convertView.findViewById(R.id.textViewTemp);
-            TextView textViewTempMax = convertView.findViewById(R.id.textViewTempMax);
-            TextView textViewTempMin = convertView.findViewById(R.id.textViewTempMin);
-            TextView textViewHumidity = convertView.findViewById(R.id.textViewHumidity);
-            TextView textViewDesc = convertView.findViewById(R.id.textViewDesc);
-            ImageView imageViewWeatherIcon = convertView.findViewById(R.id.imageViewWeatherIcon);
-
-            textViewDateTime.setText(String.valueOf(forecastResponse.dt));
-            textViewTemp.setText(String.valueOf(forecastResponse.main.temp));
-            textViewTempMax.setText(String.valueOf(forecastResponse.main.temp_max));
-            textViewTempMin.setText(String.valueOf(forecastResponse.main.temp_min));
-            textViewHumidity.setText(String.valueOf(forecastResponse.main.humidity));
-            textViewDesc.setText(String.valueOf(weather.description));
+            ((TextView)convertView.findViewById(R.id.textViewDateTime)).setText(list.dt_txt);
+            ((TextView)convertView.findViewById(R.id.textViewTemp)).setText(getString(R.string.temp_fahrenheit, list.main.temp));
+            ((TextView)convertView.findViewById(R.id.textViewTempMax)).setText(getString(R.string.temp_max, list.main.temp_max));
+            ((TextView)convertView.findViewById(R.id.textViewTempMin)).setText(getString(R.string.temp_min, list.main.temp_min));
+            ((TextView)convertView.findViewById(R.id.textViewHumidity)).setText(getString(R.string.humidity_percent, list.main.humidity));
+            ((TextView)convertView.findViewById(R.id.textViewDesc)).setText(weather.description);
 
             // Get the image icon for the current weather
             String url = "https://openweathermap.org/img/wn/" + weather.icon + "@2x.png";
-            Picasso.get().load(url).into(imageViewWeatherIcon);
+            Picasso.get().load(url).into((ImageView) convertView.findViewById(R.id.imageViewWeatherIcon2));
 
             return convertView;
         }

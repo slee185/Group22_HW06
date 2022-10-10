@@ -78,7 +78,7 @@ public class CurrentWeatherFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         requireActivity().setTitle("Current Weather");
 
-        binding.textViewCityName.setText(mCity.getCity());
+        binding.textViewCityName.setText(getString(R.string.city_country, mCity.getCity(), mCity.getCountry()));
 
         String lat = String.valueOf(mCity.getLat());
         String lon = String.valueOf(mCity.getLat());
@@ -114,14 +114,14 @@ public class CurrentWeatherFragment extends Fragment {
                 Weather weather = weatherResponse.weather.get(0);
 
                 requireActivity().runOnUiThread(() -> {
-                    binding.textViewTemp.setText(String.valueOf(weatherResponse.main.temp));
-                    binding.textViewTempMax.setText(String.valueOf(weatherResponse.main.temp_max));
-                    binding.textViewTempMin.setText(String.valueOf(weatherResponse.main.temp_min));
+                    binding.textViewTemp.setText(getString(R.string.temp_fahrenheit, weatherResponse.main.temp));
+                    binding.textViewTempMax.setText(getString(R.string.temp_fahrenheit, weatherResponse.main.temp_max));
+                    binding.textViewTempMin.setText(getString(R.string.temp_fahrenheit, weatherResponse.main.temp_min));
                     binding.textViewDesc.setText(weather.description);
-                    binding.textViewHumidity.setText(String.valueOf(weatherResponse.main.humidity));
-                    binding.textViewWindSpeed.setText(String.valueOf(weatherResponse.wind.speed));
-                    binding.textViewWindDegree.setText(String.valueOf(weatherResponse.wind.deg));
-                    binding.textViewCloudiness.setText(String.valueOf(weatherResponse.clouds.all));
+                    binding.textViewHumidity.setText(getString(R.string.string_percent, weatherResponse.main.humidity));
+                    binding.textViewWindSpeed.setText(getString(R.string.wind_speed, weatherResponse.wind.speed));
+                    binding.textViewWindDegree.setText(getString(R.string.wind_deg, weatherResponse.wind.deg));
+                    binding.textViewCloudiness.setText(getString(R.string.string_percent, weatherResponse.clouds.all));
 
                     // Get the image icon for the current weather
                     String url = "https://openweathermap.org/img/wn/" + weather.icon + "@2x.png";
