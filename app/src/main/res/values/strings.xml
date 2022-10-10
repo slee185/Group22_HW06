@@ -2,6 +2,14 @@
     <string name="app_name">Weather</string>
 
     <string name="city_country">%s, %s</string>
+    <string name="temp_fahrenheit">%.2f F</string>
+    <string name="temp_max">Max: %.2f F</string>
+    <string name="temp_min">Min: %.2f F</string>
+    <string name="string_percent">%d%%</string>
+    <string name="wind_speed">%.2f miles/hr</string>
+    <string name="wind_deg">%.1f degrees</string>
+    <string name="humidity_percent">Humidity: %d%%</string>
+
     <string name="temp_label">Temperature</string>
     <string name="temp_max_label">Temperature Max</string>
     <string name="temp_min_label">Temperature Min</string>
