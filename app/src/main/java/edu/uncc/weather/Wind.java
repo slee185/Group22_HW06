@@ -2,7 +2,7 @@ package edu.uncc.weather;
 
 public class Wind {
     double speed;
-    int deg;
+    double deg;
     double gust;
 
     @Override

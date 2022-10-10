@@ -17,9 +17,9 @@ public class WeatherResponse {
     Wind wind;
     Rain rain;
     Clouds clouds;
-    int dt;
+    long dt;
     Sys sys;
-    int timezone;
+    long timezone;
     int id;
     String name;
 
