@@ -10,4 +10,5 @@
     <string name="cloudiness_label">Cloudiness</string>
     <string name="check_forecaste_label">Check Forecast</string>
     <string name="blank_string">"  "</string>
+    <string name="string_dash">-</string>
 </resources>
